@@ -6,48 +6,27 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        // 야구 게임
-        System.out.println("\nbaseball game");
+        // 숫자 맞히기 게임
+        System.out.println("\nuess the number between 1 and 100");
+        System.out.println("Enter a number");
 
-        Random random = new Random(); // 난수 발생
+        int random = new Random().nextInt(100) + 1; // 난수 발생
         Scanner sc = new Scanner(System.in);
-        int[] num_list = new int[5];
-        int index = 0;
 
-        while(index < 5) {
-            boolean flag = false;
-            int rand = random.nextInt(8) + 1;
-            for(int i = 0; i < index; i++){
-                if(num_list[i] == rand) flag = true;
-            }
-            if(flag)continue;
-            num_list[index++] = rand;
-        }
-        System.out.println("공백으로 숫자를 구분해서 입력하세요");
+        int count = 0;
 
-        while(true){
-            int strike = 0;
-            int ball = 0;
+        while(true) {
+            int choice = sc.nextInt();
+            count++;
 
-            String answer = sc.nextLine();
-            int[] answer_list = Arrays.stream(answer.split(" "))
-                    .mapToInt(Integer::parseInt).toArray();
-
-            if(answer_list.length != 5) {
-                System.out.println("잘못된 입력입니다.");
-                continue;
-            }
-
-            for(int i = 0; i < 5; i++){
-                if(answer_list[i] == num_list[i]) strike++;
-                else if(answer.contains(Integer.toString(num_list[i]))) ball++;
-            }
-
-            System.out.println(strike + " strike " + ball + " ball\n");
-            if(strike == 5){
-                System.out.println("정답입니다.");
-                for(int a : answer_list) System.out.print(a + " ");
+            if(choice == random) {
+                System.out.println("You win!");
+                System.out.println("Count is " + count);
                 break;
+            }else if(choice > random) {
+                System.out.println("Down");
+            }else {
+                System.out.println("Up");
             }
         }
     }
