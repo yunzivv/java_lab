@@ -60,6 +60,9 @@ public class Main {
             if(answer.length != 2){
                 System.out.println("좌표를 공백으로 구분하여 입력하세요");
                 continue;
+            }else if (answer[0].equals(answer[1])) {
+                System.out.println("서로 다른 좌표를 입력하세요.");
+                continue;
             }
 
             // 입력 받은 좌표의 문자열 비교
@@ -77,8 +80,22 @@ public class Main {
                     }
                 }
             }
+
+            if (first.equals("") || second.equals("")) {
+                System.out.println("유효하지 않은 좌표입니다.");
+                continue;
+            }
+
             System.out.println("first : " + first);
             System.out.println("second : " + second);
+
+            try {
+                Integer.parseInt(list_index[firstX][firstY]);
+                Integer.parseInt(list_index[secondX][secondY]);
+            } catch (NumberFormatException e) {
+                System.out.println("이미 맞춘 칸입니다. 다른 좌표를 선택하세요.");
+                continue;
+            }
 
             if(first.equals(second)){
                 count++;
